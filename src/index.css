@@ -1,0 +1,165 @@
+@import "@fontsource/barlow/latin-400.css";
+@import "@fontsource/barlow/latin-500.css";
+@import "@fontsource/barlow/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-700-italic.css";
+@import "@fontsource/barlow-condensed/latin-800-italic.css";
+@import "tailwindcss";
+
+/*
+  Palet diambil dari logo Andra Copotan Makassar:
+  aspal  = hitam latar logo dan abu-abu krom huruf "ANDRA"
+  racing = merah cincin dan garis balap
+  lemon  = kuning huruf "COPOTAN"
+*/
+@theme {
+  --font-sans: "Barlow", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+
+  --color-aspal-50: #f6f6f6;
+  --color-aspal-100: #ececed;
+  --color-aspal-200: #dcdcde;
+  --color-aspal-300: #c4c4c7;
+  --color-aspal-400: #9a9a9f;
+  --color-aspal-500: #737378;
+  --color-aspal-600: #55555a;
+  --color-aspal-700: #3a3a3e;
+  --color-aspal-800: #1f1f21;
+  --color-aspal-900: #121213;
+  --color-aspal-950: #000000; /* hitam murni = warna latar logo, supaya logo menyatu tanpa kotak */
+
+  --color-racing-50: #fff0ef;
+  --color-racing-100: #ffdcd9;
+  --color-racing-500: #f80808;
+  --color-racing-600: #d70a0a;
+  --color-racing-700: #b00707;
+
+  --color-lemon-300: #fff08a;
+  --color-lemon-400: #fde418;
+  --color-lemon-500: #f0cf00;
+  --color-lemon-600: #fc9701;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Tailwind v4 membuat border default "currentColor"; samakan dengan warna perak aplikasi. */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-aspal-200);
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    color: var(--color-aspal-900);
+    background: var(--color-aspal-100);
+  }
+
+  /* Judul halaman mengikuti huruf miring-padat pada logo; judul bagian dibuat padat tanpa miring. */
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+  button {
+    cursor: pointer;
+  }
+
+  input,
+  select,
+  textarea {
+    background: #fff;
+    border-color: var(--color-aspal-300);
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 2px solid var(--color-racing-600);
+    outline-offset: 1px;
+    border-color: var(--color-racing-600);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-racing-600);
+    outline-offset: 2px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-lemon-400);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      scroll-behavior: auto !important;
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
+
+@layer components {
+  .btn-primary,
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    padding: 0.625rem 1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    transition: background-color 0.15s;
+  }
+  .btn-primary {
+    background: var(--color-racing-600);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-racing-700);
+  }
+  .btn-accent {
+    background: var(--color-lemon-400);
+    color: var(--color-aspal-950);
+  }
+  .btn-accent:hover:not(:disabled) {
+    background: var(--color-lemon-500);
+  }
+  .btn-primary:disabled,
+  .btn-accent:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .text-action {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Menu aktif: tepi kanan miring seperti pita pada logo (hanya di layar lebar, saat menu vertikal). */
+  @media (min-width: 48rem) {
+    .nav-active {
+      clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+      padding-right: 1.75rem;
+    }
+  }
+}
