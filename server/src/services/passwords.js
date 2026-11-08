@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs' // JS murni: jalan di Android/Termux tanpa kompilasi; format hash sama dengan bcrypt
 import { config } from '../config.js'
 
 const ROUNDS = config.isTest ? 4 : 12

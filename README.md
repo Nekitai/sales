@@ -78,6 +78,7 @@ Buka http://localhost:5173. Owner → `/owner/dashboard`, Kasir → `/kasir/penj
 Panduan lengkap dan daftar persiapan ada di **DEPLOY.md**. Ringkasnya, satu service Node menyajikan API sekaligus
 hasil build frontend (`dist/`), sehingga cookie login satu domain dan tidak perlu CORS:
 
+- Di HP Android: lihat TERMUX.md
 - Build: `npm run build:all`  •  Start: `npm run start:prod` (menjalankan migrasi lalu server)
 - Wajib di production: `NODE_ENV=production`, `DATABASE_URL`, `SESSION_SECRET` (acak, ≥32 karakter),
   `CLIENT_ORIGIN=https://domain-anda` (server menolak start bila kosong atau bukan https).
